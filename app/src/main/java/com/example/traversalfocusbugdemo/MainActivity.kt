@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,22 +17,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BreakingFocusContainer()
+    class MainActivity : ComponentActivity() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContent {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    BreakingFocusContainer()
+                }
+            }
         }
     }
-}
 
-@Composable
-fun BreakingFocusContainer() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Gray)
-    ) {
+    @Composable
+    fun BreakingFocusContainer() {
         Scaffold(topBar = {
             Box(
                 modifier = Modifier
@@ -39,17 +40,19 @@ fun BreakingFocusContainer() {
                     .background(Color.Green),
                 contentAlignment = Alignment.Center
             ) {
-                Text("The first element")
+                Text("Element №1")
             }
         }
         ) { padding ->
-            LazyColumn(
-                contentPadding = padding,
-                modifier = Modifier.background(Color.Blue)
-            ) {
-                item { Text("The second element") }
-                item { Text("the Third element") }
+            Column {
+                LazyColumn(
+                    contentPadding = padding,
+                    modifier = Modifier.background(Color.Blue)
+                ) {
+                    item { Text("Element №2") }
+                    item { Text("Element №3") }
+                }
+                Text("Element №4")
             }
         }
     }
-}
